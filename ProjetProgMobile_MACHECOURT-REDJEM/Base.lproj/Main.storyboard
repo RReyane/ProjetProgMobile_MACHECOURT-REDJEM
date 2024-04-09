@@ -16,12 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_balle" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-qG-lCG">
-                                <rect key="frame" x="160" y="544" width="79" height="88"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Fond" translatesAutoresizingMaskIntoConstraints="NO" id="ZeL-MP-Kzr">
                                 <rect key="frame" x="-8" y="-15" width="410" height="882"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_balle" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-qG-lCG">
+                                <rect key="frame" x="160" y="544" width="79" height="88"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Joueur_Kart" translatesAutoresizingMaskIntoConstraints="NO" id="4aM-G0-mIS">
@@ -36,6 +36,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <connections>
+                        <outlet property="ball" destination="Dwh-qG-lCG" id="KmF-AA-0x4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
