@@ -38,6 +38,8 @@
                     </view>
                     <connections>
                         <outlet property="ball" destination="Dwh-qG-lCG" id="KmF-AA-0x4"/>
+                        <outletCollection property="Joueur" destination="77E-uw-zas" collectionClass="NSMutableArray" id="4LX-KS-R14"/>
+                        <outletCollection property="Joueur" destination="4aM-G0-mIS" collectionClass="NSMutableArray" id="9cD-fA-Rcf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

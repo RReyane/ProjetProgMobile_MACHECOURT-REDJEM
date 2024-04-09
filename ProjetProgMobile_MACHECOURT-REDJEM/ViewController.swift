@@ -9,6 +9,10 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var cible:CGPoint!
+    var radians:CGFloat!
+    @IBOutlet var Joueur: [UIImageView]!
+    
     var t: Timer!
     var velocity = CGPoint(x: 15, y: 13)
     var isBallmoving = false
@@ -18,6 +22,7 @@ class ViewController: UIViewController {
     
     func move(){ // We should manage here the movement of the ball
         print("La balle est en x(\(ball.frame.origin.x)) et y(\(ball.frame.origin.y))")
+        ball.isHidden = false
         var p : CGPoint = ball.frame.origin
         let s = ball.frame.size
         let e = CGRect(x: 25, y: 200, width: 375, height: 650)
@@ -47,11 +52,39 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         ball.frame.origin = CGPoint(x: 200, y: 200)
-        isBallmoving = true // we can choose if the ball is moving or not here
         
         t = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
     }
 
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let doigt = touches.randomElement()!
+//        let point = doigt.location(in: view)
+//        print("vous avez touché a la position x:\(point.x) y:\(point.y)")
+//    }
 
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let doigt = touches.randomElement()!
+        cible = doigt.location(in: view)
+        
+        var dX = cible!.x-Joueur[0].center.x;        // distance along X
+        var dY = cible!.y-Joueur[0].center.y;        // distance along Y
+        radians = atan2(dY, dX)+1.5;
+        if radians > 1 {
+            radians = 1
+        }
+        if radians < -1 {
+            radians = -1
+        }
+        print(radians)
+        
+        Joueur[0].transform = CGAffineTransformMakeRotation(radians)
+        
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //ball.frame.origin = CGPoint(x:Joueur[0].center.x+20,y:Joueur[0].center.y+(radians*20))
+        //BESOIN DE FAIRE EN SORTE QUE LA BALLE PARTE DANS LA DIRECTION DU CANON
+        isBallmoving = true
+    }
 }
 
