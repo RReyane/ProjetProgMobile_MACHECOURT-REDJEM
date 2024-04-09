@@ -15,16 +15,38 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_balle" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-qG-lCG">
+                                <rect key="frame" x="160" y="544" width="79" height="88"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Fond" translatesAutoresizingMaskIntoConstraints="NO" id="ZeL-MP-Kzr">
+                                <rect key="frame" x="-8" y="-15" width="410" height="882"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Joueur_Kart" translatesAutoresizingMaskIntoConstraints="NO" id="4aM-G0-mIS">
+                                <rect key="frame" x="117" y="489" width="158" height="217"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Joueur_Canon" translatesAutoresizingMaskIntoConstraints="NO" id="77E-uw-zas">
+                                <rect key="frame" x="130" y="553" width="135" height="142"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="-50"/>
+            <point key="canvasLocation" x="43.511450381679388" y="-50"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Punball_Fond" width="1080" height="2400"/>
+        <image name="Punball_Joueur_Canon" width="1620" height="2160"/>
+        <image name="Punball_Joueur_Kart" width="1620" height="2160"/>
+        <image name="Punball_balle" width="1620" height="2160"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
