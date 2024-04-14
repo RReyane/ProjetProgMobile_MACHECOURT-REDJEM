@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,16 +20,16 @@
                                 <rect key="frame" x="-8" y="-15" width="410" height="882"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_balle" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-qG-lCG">
-                                <rect key="frame" x="160" y="544" width="79" height="88"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_balle" translatesAutoresizingMaskIntoConstraints="NO" id="Dwh-qG-lCG">
+                                <rect key="frame" x="189" y="577" width="16" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Joueur_Kart" translatesAutoresizingMaskIntoConstraints="NO" id="4aM-G0-mIS">
-                                <rect key="frame" x="117" y="489" width="158" height="217"/>
+                                <rect key="frame" x="160" y="588" width="73" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="Punball_Joueur_Canon" translatesAutoresizingMaskIntoConstraints="NO" id="77E-uw-zas">
-                                <rect key="frame" x="130" y="553" width="135" height="142"/>
+                                <rect key="frame" x="139" y="577" width="116" height="123"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -49,9 +49,9 @@
     </scenes>
     <resources>
         <image name="Punball_Fond" width="1080" height="2400"/>
-        <image name="Punball_Joueur_Canon" width="1620" height="2160"/>
-        <image name="Punball_Joueur_Kart" width="1620" height="2160"/>
-        <image name="Punball_balle" width="1620" height="2160"/>
+        <image name="Punball_Joueur_Canon" width="599" height="1791"/>
+        <image name="Punball_Joueur_Kart" width="836" height="589"/>
+        <image name="Punball_balle" width="276" height="274"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
