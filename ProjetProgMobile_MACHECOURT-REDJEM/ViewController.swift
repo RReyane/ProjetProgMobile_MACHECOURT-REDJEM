@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     struct monstre { //structure de monstre, une image et des PV
         var image: UIImageView
         var pv = 1
+        var attackType = 1 //0= corpsAcorps, 1 = distance
     }
     var listeMonstres: [monstre]! //liste de monstre
     
@@ -132,6 +133,8 @@ class ViewController: UIViewController {
     
     
     func spawnRandomEnnemies(){
+        let nomsMonstre = ["Punball_Ennemi_PeaLauncher","PunBall_Ennemi_Skeleton"]
+        
         var nbMonstre: Int!
         
         switch Int.random(in: 0...10) {
@@ -142,5 +145,9 @@ class ViewController: UIViewController {
         default:
             nbMonstre = 1
         }
+        
+//        for _ in 1...nbMonstre!{
+//            listeMonstres.append(monstre(image: UIImageView(image: UIImage(named: nomsMonstre[0]))))
+//        }
     }
 }
