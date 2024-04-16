@@ -20,11 +20,11 @@ class ViewController: UIViewController {
     var isBallmoving = false // drapeau mouvement balle
     
     @IBOutlet weak var ballImage: UIImageView!
-//    struct Balle { //structure de balle, une image et un effet
-//        var image: UIImageView
-//        var effet = 0 //0 = rien, 1 = feu, 2= glace
-//    }
-//    var listeBalles: [Balle]! //liste de balles
+    struct monstre { //structure de monstre, une image et des PV
+        var image: UIImageView
+        var pv = 1
+    }
+    var listeMonstres: [monstre]! //liste de monstre
     
     @IBOutlet weak var numVague: UILabel!
     var cptVague = 0
@@ -57,13 +57,18 @@ class ViewController: UIViewController {
             
             velocity.x = 0
             velocity.y = 0
+            
         }
+        
+        
     }
     
     @objc func loop(t:Timer){
         if isBallmoving {
             move()
             
+            Joueur[0].center.x = ballImage.center.x
+            Joueur[1].center.x = ballImage.center.x
             
             vitesse += 0.8 * Double(tempsEcoule)
             tempsEcoule += 0.05
@@ -125,7 +130,17 @@ class ViewController: UIViewController {
         }
     }
     
+    
     func spawnRandomEnnemies(){
+        var nbMonstre: Int!
         
+        switch Int.random(in: 0...10) {
+        case 5...8:
+            nbMonstre = 2
+        case 9...10:
+            nbMonstre = 3
+        default:
+            nbMonstre = 1
+        }
     }
 }
