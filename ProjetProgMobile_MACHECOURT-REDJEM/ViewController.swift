@@ -14,27 +14,33 @@ class ViewController: UIViewController {
     @IBOutlet var Joueur: [UIImageView]! //liste Joueur 0:canon,1:kart
     
     var t: Timer!
-    var tempsEcoule = 0.0
+    var tempsEcoule = 0.0 // temps ecoulé durant chaque tour
     var vitesse = 15.0
     var velocity: CGPoint! // velocité de la balle
     var isBallmoving = false // drapeau mouvement balle
     
+    @IBOutlet weak var ballImage: UIImageView!
+//    struct Balle { //structure de balle, une image et un effet
+//        var image: UIImageView
+//        var effet = 0 //0 = rien, 1 = feu, 2= glace
+//    }
+//    var listeBalles: [Balle]! //liste de balles
     
-    @IBOutlet weak var ball: UIImageView!
+    @IBOutlet weak var numVague: UILabel!
+    var cptVague = 0
     
     func move(){ // We should manage here the movement of the ball
-        tempsEcoule = 0 // remise du timer a 0
-        vitesse = 15 // remise de la vitesse a sa valeur originel
+
         
-        ball.isHidden = false
+        ballImage.isHidden = false
         
-        var p : CGPoint = ball.frame.origin //position de la balle
-        let s = ball.frame.size //taille de la balle
+        var p : CGPoint = ballImage.frame.origin //position de la balle
+        let s = ballImage.frame.size //taille de la balle
         let e = CGRect(x: 50, y: 235, width: 345, height: 640) //taille de l'ecran
         
         p.x += velocity.x
         p.y += velocity.y
-        ball.frame.origin = p
+        ballImage.frame.origin = p
         
         if p.x + s.width > e.width || p.x < e.minX { //rebond sur un mur vertical
             velocity.x = -velocity.x
@@ -43,8 +49,12 @@ class ViewController: UIViewController {
             velocity.y = -velocity.y
         }
         if p.y + s.height > e.height { //arret sur le mur du bas
-            ball.isHidden = true
+            ballImage.isHidden = true
             isBallmoving = false
+            
+            cptVague += 1
+            numVague.text = String(cptVague)
+            
             velocity.x = 0
             velocity.y = 0
         }
@@ -54,16 +64,22 @@ class ViewController: UIViewController {
         if isBallmoving {
             move()
             
+            
             vitesse += 0.8 * Double(tempsEcoule)
             tempsEcoule += 0.05
+        }
+        else{
+            tempsEcoule = 0 // remise du timer a 0
+            vitesse = 15 // remise de la vitesse a sa valeur originel
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        t = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(loop), userInfo: nil, repeats: true)
+        print(ballImage.center)
+//        listeBalles.append(Balle(image:UIImageView(image:UIImage(named: "Punball_Ball.png"))))
+        t = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(loop), userInfo: nil, repeats: true) // initialisation de la boucle de jeu
     }
 
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -102,10 +118,14 @@ class ViewController: UIViewController {
                 let ballX = Joueur[0].center.x + CGFloat(cos(radians - .pi/2)) * distance
                 let ballY = Joueur[0].center.y + CGFloat(sin(radians - .pi/2)) * distance
                 
-                ball.center = CGPoint(x:ballX,y:ballY) // set de la position de la balle par rapport a la nouvelle orientation du canon
+                ballImage.center = CGPoint(x:ballX,y:ballY) // set de la position de la balle par rapport a la nouvelle orientation du canon
                 velocity = CGPoint(x: cos(radians - .pi/2) * CGFloat(vitesse), y: sin(radians - .pi/2) * CGFloat(vitesse)) // set de la direction dans laquelle la balle part
                 isBallmoving = true // fait bouger la balle
             }
         }
+    }
+    
+    func spawnRandomEnnemies(){
+        
     }
 }
