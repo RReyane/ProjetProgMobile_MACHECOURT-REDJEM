@@ -59,6 +59,14 @@ class ViewController: UIViewController {
             velocity.x = 0
             velocity.y = 0
             
+            //deplace le joueur au derneir emplacemnt de la balle
+            let J0diffX = ballImage.center.x - Joueur[0].center.x
+            let J1diffX = ballImage.center.x - Joueur[1].center.x
+            if J0diffX != 0 {
+                UIView.animate(withDuration: 0.8, animations: { self.Joueur[0].transform = CGAffineTransformMakeTranslation( J0diffX, 0)
+                    self.Joueur[1].transform = CGAffineTransformMakeTranslation( J1diffX, 0)} )
+            }
+
         }
         
         
@@ -67,10 +75,7 @@ class ViewController: UIViewController {
     @objc func loop(t:Timer){
         if isBallmoving {
             move()
-            
-            Joueur[0].center.x = ballImage.center.x
-            Joueur[1].center.x = ballImage.center.x
-            
+
             vitesse += 0.8 * Double(tempsEcoule)
             tempsEcoule += 0.05
         }
@@ -83,8 +88,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print(ballImage.center)
-//        listeBalles.append(Balle(image:UIImageView(image:UIImage(named: "Punball_Ball.png"))))
+
         t = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(loop), userInfo: nil, repeats: true) // initialisation de la boucle de jeu
     }
 
@@ -95,6 +99,8 @@ class ViewController: UIViewController {
 //    }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Joueur[0].center.x = ballImage.center.x //Fix d'un bug lors de la translation du joueur, ça nouvelle position n'est pas prise en compte (a cause de l'utilisation de self peut etre ?) NE PAS TOUCHER
+        
         let doigt = touches.randomElement()!
         cible = doigt.location(in: view)
         if !isBallmoving {
@@ -108,7 +114,7 @@ class ViewController: UIViewController {
             if radians < -1 || radians > 3 {
                 radians = -1
             }
-            
+
             Joueur[0].transform = CGAffineTransformMakeRotation(radians) // rotation du canon vers la cible
         }
         
