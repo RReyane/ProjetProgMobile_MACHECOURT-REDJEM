@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var vitesse = 15.0
     var velocity: CGPoint! // velocité de la balle
     var isBallmoving = false // drapeau mouvement balle
+    var balleMax = 1 // nombre de balle max a lancer
+    var balleRestante = 1 //nombre de balle restante a lancé
     
     @IBOutlet weak var ballImage: UIImageView!
     struct monstre { //structure de monstre, une image et des PV
@@ -31,9 +33,6 @@ class ViewController: UIViewController {
     var cptVague = 0
     
     func move(){ // We should manage here the movement of the ball
-
-        
-        ballImage.isHidden = false
         
         var p : CGPoint = ballImage.frame.origin //position de la balle
         let s = ballImage.frame.size //taille de la balle
@@ -50,23 +49,36 @@ class ViewController: UIViewController {
             velocity.y = -velocity.y
         }
         if p.y + s.height > e.height { //arret sur le mur du bas
-            ballImage.isHidden = true
-            isBallmoving = false
-            
-            cptVague += 1
-            numVague.text = String(cptVague)
-            
-            velocity.x = 0
-            velocity.y = 0
-            
-            //deplace le joueur au derneir emplacemnt de la balle
-            let J0diffX = ballImage.center.x - Joueur[0].center.x
-            let J1diffX = ballImage.center.x - Joueur[1].center.x
-            if J0diffX != 0 {
-                UIView.animate(withDuration: 0.8, animations: { self.Joueur[0].transform = CGAffineTransformMakeTranslation( J0diffX, 0)
-                    self.Joueur[1].transform = CGAffineTransformMakeTranslation( J1diffX, 0)} )
+            if balleRestante > 1 {
+                balleRestante -= 1 //diminution du nombre de balle de 1
+                
+                // reset de l'emplacement et de la velocité de la balle au valeurs de lancement
+                let distance  = getDistanceBalleCanon(Joueur[0].bounds.size)
+                let ballX = Joueur[0].center.x + CGFloat(cos(radians - .pi/2)) * distance
+                let ballY = Joueur[0].center.y + CGFloat(sin(radians - .pi/2)) * distance
+                ballImage.center = CGPoint(x:ballX,y:ballY)
+                
+                velocity = CGPoint(x: cos(radians - .pi/2) * CGFloat(vitesse), y: sin(radians - .pi/2) * CGFloat(vitesse))
             }
-
+            else {
+                ballImage.isHidden = true
+                isBallmoving = false
+                
+                cptVague += 1
+                numVague.text = String(cptVague)
+                
+                velocity.x = 0
+                velocity.y = 0
+                
+                //deplace le joueur au derneir emplacemnt de la balle
+                let J0diffX = ballImage.center.x - Joueur[0].center.x
+                let J1diffX = ballImage.center.x - Joueur[1].center.x
+                if J0diffX != 0 {
+                    UIView.animate(withDuration: 0.8, animations: { self.Joueur[0].transform = CGAffineTransformMakeTranslation( J0diffX, 0)
+                        self.Joueur[1].transform = CGAffineTransformMakeTranslation( J1diffX, 0)} )
+                }
+                balleRestante = balleMax
+            }
         }
         
         
@@ -76,13 +88,13 @@ class ViewController: UIViewController {
         if isBallmoving {
             move()
 
-            vitesse += 0.8 * Double(tempsEcoule)
-            tempsEcoule += 0.05
+//            vitesse += 0.05 * Double(tempsEcoule)
+//            tempsEcoule += 0.05
         }
-        else{
-            tempsEcoule = 0 // remise du timer a 0
-            vitesse = 15 // remise de la vitesse a sa valeur originel
-        }
+//        else{
+//            tempsEcoule = 0 // remise du timer a 0
+//            vitesse = 15 // remise de la vitesse a sa valeur originel
+//        }
     }
 
     override func viewDidLoad() {
@@ -123,16 +135,15 @@ class ViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>,     with event: UIEvent?) {
         if !isBallmoving {
             if radians != nil {
-                let joueurHeight = Joueur[0].bounds.size.height / 2.0
-                let joueurWidth = Joueur[0].bounds.size.width / 2.0
-                let distance = sqrt(pow(joueurHeight,2.0)+pow(joueurWidth,2.0)) - 25.0// distance entre la balle et le centre du cannon
-                
+                let distance  = getDistanceBalleCanon(Joueur[0].bounds.size)
                 let ballX = Joueur[0].center.x + CGFloat(cos(radians - .pi/2)) * distance
                 let ballY = Joueur[0].center.y + CGFloat(sin(radians - .pi/2)) * distance
                 
                 ballImage.center = CGPoint(x:ballX,y:ballY) // set de la position de la balle par rapport a la nouvelle orientation du canon
                 velocity = CGPoint(x: cos(radians - .pi/2) * CGFloat(vitesse), y: sin(radians - .pi/2) * CGFloat(vitesse)) // set de la direction dans laquelle la balle part
                 isBallmoving = true // fait bouger la balle
+                ballImage.isHidden = false //fait apparaitre la balle
+                balleRestante = balleMax // recharge le nombre de balle a lancer
             }
         }
     }
@@ -156,4 +167,10 @@ class ViewController: UIViewController {
 //            listeMonstres.append(monstre(image: UIImageView(image: UIImage(named: nomsMonstre[0]))))
 //        }
     }
+}
+
+func getDistanceBalleCanon(_ J:CGSize) -> Double{
+    let joueurHeight = J.height / 2.0
+    let joueurWidth = J.width / 2.0
+    return sqrt(pow(joueurHeight,2.0)+pow(joueurWidth,2.0)) - 25.0// distance entre la balle et le centre du cannon
 }
