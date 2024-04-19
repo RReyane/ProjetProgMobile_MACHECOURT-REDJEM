@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var radians:CGFloat! // angle entre le canon et la cible
     
     @IBOutlet var Joueur: [UIImageView]! //liste Joueur 0:canon,1:kart
-    var pvJoueur = 0
+    var pvJoueur = 10
     var maxPV = 10
     @IBOutlet weak var pvBarreInterieur: UIImageView!
     
